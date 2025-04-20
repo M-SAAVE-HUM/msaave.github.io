@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { StaticImageData } from 'next/image';
+
 
 export default function Home() {
   return (
@@ -52,7 +54,7 @@ const Navbar = () => {
   );
 };
 
-const MobileMenu = ({ links }) => {
+const MobileMenu = ({ links }: { links: { label: string; href: string }[] }) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -88,7 +90,7 @@ const MobileMenu = ({ links }) => {
 /* ------------------------------------------------------------------ */
 /* ------------------------------ GALLERY --------------------------- */
 /* ------------------------------------------------------------------ */
-const Gallery = ({ children }) => (
+const Gallery = ({ children }: { children: React.ReactNode }) => (
   <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-4">{children}</div>
 );
 
@@ -241,7 +243,7 @@ const Leadership = () => {
 };
 
 
-const ProfileCard = ({ img, name, role }) => (
+const ProfileCard = ({ img, name, role }: { img: string | StaticImageData; name?: string; role?: string }) => (
   <div className="flex flex-col items-center text-center">
     <Image src={img} alt={name || 'Team photo'} width={200} height={200} className="rounded-full object-cover" />
     {name && <h4 className="mt-4 font-semibold">{name}</h4>}
@@ -316,7 +318,7 @@ const Contact = () => (
         </div>
         <input type="email" name="email" placeholder="Email" className="w-full p-3 border rounded" required />
         <input type="text" name="subject" placeholder="Subject" className="w-full p-3 border rounded" />
-        <textarea name="message" placeholder="Message" rows="5" className="w-full p-3 border rounded" />
+        <textarea name="message" placeholder="Message" rows={5} className="w-full p-3 border rounded" />
         <button type="submit" className="px-6 py-3 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition-colors w-full">
           SUBMIT
         </button>
